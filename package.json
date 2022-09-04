@@ -1,0 +1,31 @@
+{
+  "name": "part4_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:excercise": "node exercises/phonebook/index.js",
+    "start:practice": "node practice/part4_backend/index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buildui:practice": "shx rm -rf build && cd ../FullStackOpen2022_Part2/practices/part2-notes/ && npm run build && cp -r build ../../../FullStackOpen2022_Part4/",
+    "buildui:exercise": "shx rm -rf build && cd ../FullStackOpen2022_Part2/exercises/phonebook && npm run build && cp -r build ../../../FullStackOpen2022_Part4/",
+    "deploy": "git push heroku main",
+    "deployfull:exercise": "npm run buildui:exercise && git add . && git commit -m uibuild:excercise && npm run deploy",
+    "deployfull:practice": "npm run buildui:practice && git add . && git commit -m uibuild:practice && npm run deploy",
+    "logs:prod": "heroku logs --tail"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "dotenv": "^16.0.1",
+    "mongoose": "^6.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18",
+    "shx": "^0.3.4"
+  }
+}

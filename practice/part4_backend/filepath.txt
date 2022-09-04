@@ -1,0 +1,5 @@
+FullStackOpen2022_Part4/practice/part4_backend
+
+set heroku config keyword command:
+
+heroku config:set MONGODB_URI=mongodb+srv://tgo:enterpasswordhere@fullstackopen-tony.3qsjiry.mongodb.net/noteApp?retryWrites=true&w=majority
