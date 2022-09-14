@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 // NO PASSWORD SAVED SO NOT WORKING
 // const url = `mongodb+srv://tgo:{password}@fullstackopen-tony.3qsjiry.mongodb.net/noteApp?retryWrites=true&w=majority`;
-const url = process.env.MONGODB_URI
 
 mongoose
   .connect(url)
