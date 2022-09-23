@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 // NO PASSWORD SAVED SO NOT WORKING
 // const url = `mongodb+srv://tgo:{password}@fullstackopen-tony.3qsjiry.mongodb.net/noteApp?retryWrites=true&w=majority`;
-
+const config = require('../utils/config')
 mongoose
-  .connect(url)
+  .connect(config.MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })

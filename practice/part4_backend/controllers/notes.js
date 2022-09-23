@@ -5,13 +5,13 @@ notesRouter.get('/', (request, response) => {
   response.send('<h1>Hello world!!!</h1>')
 })
 
-notesRouter.get('/api/notes', (request, response) => {
+notesRouter.get('/', (request, response) => {
   Note.find({}).then((notes) => {
     response.json(notes)
   })
 })
 
-notesRouter.get('/api/notes/:id', (request, response, next) => {
+notesRouter.get('/:id', (request, response, next) => {
   const id = request.params.id
   console.log(id)
   Note.findById(id)
@@ -26,7 +26,7 @@ notesRouter.get('/api/notes/:id', (request, response, next) => {
     .catch((error) => next(error))
 })
 
-notesRouter.delete('/api/notes/:id', (request, response, next) => {
+notesRouter.delete('/', (request, response, next) => {
   const id = request.params.id
   Note.findByIdAndRemove(id)
     .then((result) => {
@@ -40,7 +40,7 @@ notesRouter.delete('/api/notes/:id', (request, response, next) => {
     .catch((error) => next(error))
 })
 
-notesRouter.put('/api/notes/:id', (request, response, next) => {
+notesRouter.put('/:id', (request, response, next) => {
   const body = request.body
   const note = {
     content: body.content,
@@ -61,7 +61,7 @@ notesRouter.put('/api/notes/:id', (request, response, next) => {
     })
 })
 
-notesRouter.post('/api/notes', (request, response, next) => {
+notesRouter.post('/', (request, response, next) => {
   // request.body has the supposed new json request object note that needs to be added using post
   const body = request.body
 
