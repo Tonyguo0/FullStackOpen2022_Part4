@@ -1,3 +1,4 @@
+// exports the router to be available for all consumers of the module
 const notesRouter = require('express').Router()
 const Note = require('../models/note')
 
