@@ -1,0 +1,6 @@
+FullStackOpen2022_Part4/exercises/bloglist/
+
+
+set heroku config keyword command:
+
+heroku config:set MONGODB_URI=mongodb+srv://tgo:setpasswordhere@fullstackopen-tony.3qsjiry.mongodb.net/noteApp?retryWrites=true&w=majority
