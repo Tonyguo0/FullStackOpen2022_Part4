@@ -1,4 +1,4 @@
-FullStackOpen2022_Part3/exercises/phonebook/
+FullStackOpen2022_Part4/exercises/phonebook/
 
 
 set heroku config keyword command:
