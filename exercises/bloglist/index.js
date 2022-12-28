@@ -4,6 +4,8 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 require('dotenv').config()
+const logger = require('./utils/logger')
+
 
 const blogSchema = new mongoose.Schema({
   title: String,
@@ -24,6 +26,7 @@ app.use(express.json())
 app.get('/api/blogs', (request, response) => {
   Blog.find({}).then((blogs) => {
     response.json(blogs)
+    logger.info(`Blog ${blogs} returned successfully`)
   })
 })
 
@@ -33,11 +36,13 @@ app.post('/api/blogs', (request, response) => {
 
   blog.save().then((result) => {
     response.status(201).json(result)
+  logger.info(`Blog ${blog} added successfully`)
+
   })
 })
 
 const PORT = 3003
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  logger.info(`Server running on port ${PORT}`,"hello", "welcome", "to paradise")
 })
