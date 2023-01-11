@@ -2,9 +2,9 @@
 ## Exercises
 - [x] exercise 4.1
 - [x] exercise 4.2
-- [ ] exercise 4.3
-- [ ] exercise 4.4
-- [ ] exercise 4.5
+- [x] exercise 4.3
+- [x] exercise 4.4
+- [x] exercise 4.5
 - [ ] exercise 4.6
 - [ ] exercise 4.7
 - [ ] exercise 4.8
