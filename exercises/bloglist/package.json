@@ -4,9 +4,10 @@
   "description": "bloglist application, allows users to save information about interesting blogs they have stumbled across on the internet, each listed blog we will save the author, title, url and amount of upvotes frm users of the application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "jest --verbose"
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "test": "NODE_ENV=test jest --verbose --runInBand"
+
   },
   "author": "Tony Guo",
   "license": "ISC",
