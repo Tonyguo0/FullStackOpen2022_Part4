@@ -2,7 +2,7 @@
 const notesRouter = require('express').Router()
 const Note = require('../models/note')
 
-notesRouter.get('/', (request, response) => {
+notesRouter.get('/helloworld', (request, response) => {
   response.send('<h1>Hello world!!!</h1>')
 })
 
@@ -86,3 +86,4 @@ notesRouter.post('/', (request, response, next) => {
     })
 })
 
+module.exports = notesRouter
