@@ -6,10 +6,9 @@ notesRouter.get('/helloworld', (request, response) => {
   response.send('<h1>Hello world!!!</h1>')
 })
 
-notesRouter.get('/', (request, response) => {
-  Note.find({}).then((notes) => {
-    response.json(notes)
-  })
+notesRouter.get('/', async (request, response) => {
+  const note = await Note.find({})
+  response.json(note)
 })
 
 notesRouter.get('/:id', (request, response, next) => {
@@ -79,7 +78,7 @@ notesRouter.post('/', (request, response, next) => {
   note
     .save()
     .then((savedNote) => {
-      response.json(savedNote)
+      response.status(201).json(savedNote)
     })
     .catch((err) => {
       next(err)
