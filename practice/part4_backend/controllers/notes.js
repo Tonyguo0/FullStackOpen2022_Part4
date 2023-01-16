@@ -61,7 +61,7 @@ notesRouter.put('/:id', (request, response, next) => {
     })
 })
 
-notesRouter.post('/', (request, response, next) => {
+notesRouter.post('/', async (request, response, next) => {
   // request.body has the supposed new json request object note that needs to be added using post
   const body = request.body
 
@@ -75,14 +75,12 @@ notesRouter.post('/', (request, response, next) => {
     date: new Date(),
   })
 
-  note
-    .save()
-    .then((savedNote) => {
-      response.status(201).json(savedNote)
-    })
-    .catch((err) => {
-      next(err)
-    })
+  try {
+    const savedNote = await note.save()
+    response.status(201).json(savedNote)
+  } catch (exception) {
+    next(exception)
+  }
 })
 
 module.exports = notesRouter
