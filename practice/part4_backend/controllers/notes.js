@@ -11,33 +11,23 @@ notesRouter.get('/', async (request, response) => {
   response.json(note)
 })
 
-notesRouter.get('/:id', (request, response, next) => {
+notesRouter.get('/:id', async (request, response) => {
   const id = request.params.id
-  console.log(id)
-  Note.findById(id)
-    .then((note) => {
-      if (note) {
-        response.json(note)
-      } else {
-        response.statusMessage = `resource note with id ${id} can't be found`
-        response.status(404).end()
-      }
-    })
-    .catch((error) => next(error))
+  const note = await Note.findById(id)
+
+  if (note) {
+    response.json(note)
+  } else {
+    response.statusMessage = `resource note with id ${id} can't be found`
+    response.status(404).end()
+  }
 })
 
-notesRouter.delete('/', (request, response, next) => {
+notesRouter.delete('/:id', async (request, response) => {
   const id = request.params.id
-  Note.findByIdAndRemove(id)
-    .then((result) => {
-      if (result) response.status(204).end()
-      else {
-        response
-          .status(404)
-          .send({ error: `resource note with id ${id} can't be found` })
-      }
-    })
-    .catch((error) => next(error))
+  const note = await Note.findByIdAndRemove(id)
+
+  response.status(204).json(note)
 })
 
 notesRouter.put('/:id', (request, response, next) => {
@@ -61,7 +51,7 @@ notesRouter.put('/:id', (request, response, next) => {
     })
 })
 
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => {
   // request.body has the supposed new json request object note that needs to be added using post
   const body = request.body
 
@@ -75,12 +65,8 @@ notesRouter.post('/', async (request, response, next) => {
     date: new Date(),
   })
 
-  try {
-    const savedNote = await note.save()
-    response.status(201).json(savedNote)
-  } catch (exception) {
-    next(exception)
-  }
+  const savedNote = await note.save()
+  response.status(201).json(savedNote)
 })
 
 module.exports = notesRouter
