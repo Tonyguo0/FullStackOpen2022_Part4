@@ -8,7 +8,7 @@
     "start:practice": "NODE_ENV=production node practice/part4_backend/index.js",
     "dev:exercise": "NODE_ENV=development nodemon exercises/bloglist/index.js",
     "dev:practice": "NODE_ENV=development nodemon practice/part4_backend/index.js",
-    "test:exercise": "NODE_ENV=test jest exercises/bloglist/tests --verbose --runInBand",
+    "test:exercise": "NODE_ENV=test jest exercises/bloglist/tests/blog_api.test.js --verbose --runInBand --forceExit",
     "test:practice": "NODE_ENV=test jest practice/part4_backend/tests/note_api.test.js --verbose --runInBand --forceExit",
     "buildui:practice": "shx rm -rf build && cd ../FullStackOpen2022_Part2/practices/part2-notes/ && npm run build && cp -r build ../../../FullStackOpen2022_Part4/",
     "buildui:exercise": "shx rm -rf build && cd ../FullStackOpen2022_Part2/exercises/phonebook && npm run build && cp -r build ../../../FullStackOpen2022_Part4/",
