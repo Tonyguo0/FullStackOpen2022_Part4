@@ -7,7 +7,7 @@
 - [x] exercise 4.5
 - [ ] exercise 4.6
 - [ ] exercise 4.7
-- [ ] exercise 4.8
+- [x] exercise 4.8
 - [ ] exercise 4.9
 - [ ] exercise 4.10
 - [ ] exercise 4.11

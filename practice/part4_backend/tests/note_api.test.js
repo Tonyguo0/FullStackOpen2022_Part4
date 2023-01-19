@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
+// test can use the api superagent object to make HTTP requests to the backend
 const supertest = require('supertest')
-const app = require('../app')
 const api = supertest(app)
+
+const app = require('../app')
 const Note = require('../models/note')
 const helper = require('./test_helper')
 
