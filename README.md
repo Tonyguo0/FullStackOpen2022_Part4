@@ -8,8 +8,8 @@
 - [ ] exercise 4.6
 - [ ] exercise 4.7
 - [x] exercise 4.8
-- [ ] exercise 4.9
-- [ ] exercise 4.10
+- [x] exercise 4.9
+- [x] exercise 4.10
 - [ ] exercise 4.11
 - [ ] exercise 4.12
 - [ ] exercise 4.13

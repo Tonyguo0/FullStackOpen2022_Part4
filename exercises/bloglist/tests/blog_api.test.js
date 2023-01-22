@@ -25,6 +25,36 @@ test('GET the correct amount of blog posts returned', async () => {
   expect(response.body).toHaveLength(bloghelp.bloginitiated.length)
 })
 
+test('the property of the blogposts is named id', async () => {
+  const response = await api.get('/api/blogs')
+  response.body.forEach((blog) => {
+    expect(blog.id).toBeDefined()
+  })
+})
+
+test.only('POST creates a new blog post successfully', async () => {
+  const newBlog = {
+    title: 'Top 10 reasons why you should learn React right now',
+    author: 'Mohammad Ayubo',
+    url: 'https://medium.com/@SilentHackz/top-10-reasons-why-you-should-learn-react-right-now-f7b0add7ec0d',
+    likes: '110',
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+
+  expect(response.body).toHaveLength(bloghelp.bloginitiated.length + 1)
+  const blog_title = response.body.map((b) => b.title)
+  expect(blog_title).toContain(
+    'Top 10 reasons why you should learn React right now'
+  )
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

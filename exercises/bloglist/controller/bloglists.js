@@ -8,13 +8,13 @@ bloglistsRouter.get('/', async(request, response) => {
   response.json(bloglist)
 })
 
-bloglistsRouter.post('/', (request, response) => {
+bloglistsRouter.post('/', async(request, response) => {
   const blog = new Blog(request.body)
 
-  blog.save().then((result) => {
-    response.status(201).json(result)
-    logger.info(`Blog ${blog} added successfully`)
-  })
+  const result = await blog.save()
+  logger.info(`Blog ${blog} added successfully`)
+  response.status(201).json(result)
+  
 })
 
 module.exports = bloglistsRouter
