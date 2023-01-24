@@ -4,6 +4,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const bloghelp = require('./blogtest_help')
+const logger = require('../utils/logger')
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -32,7 +33,7 @@ test('the property of the blogposts is named id', async () => {
   })
 })
 
-test.only('POST creates a new blog post successfully', async () => {
+test('POST creates a new blog post successfully', async () => {
   const newBlog = {
     title: 'Top 10 reasons why you should learn React right now',
     author: 'Mohammad Ayubo',
@@ -53,6 +54,19 @@ test.only('POST creates a new blog post successfully', async () => {
   expect(blog_title).toContain(
     'Top 10 reasons why you should learn React right now'
   )
+})
+
+test.only('DELETE deletes a blog successfully', async () => {
+  const BlogAtStart = await bloghelp.BloginDB()
+  const BlogtoDelete = BlogAtStart[1]
+
+  await api.delete(`/api/blogs/${BlogtoDelete.id}`).expect(204)
+
+  const BlogsAfterDelete = await bloghelp.BloginDB()
+  expect(BlogsAfterDelete).toHaveLength(bloghelp.bloginitiated.length - 1)
+
+  const blogtitle = BlogsAfterDelete.map((b) => b.title)
+  expect(blogtitle).not.toContain(BlogtoDelete.title)
 })
 
 afterAll(() => {

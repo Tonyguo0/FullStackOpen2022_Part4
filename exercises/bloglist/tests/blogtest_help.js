@@ -1,3 +1,5 @@
+const Blog = require('../models/bloglist')
+const logger = require('../utils/logger')
 bloginitiated = [
   {
     title: '10 things in JavaScript I love',
@@ -12,6 +14,18 @@ bloginitiated = [
     likes: '20',
   },
 ]
+
+const BloginDB = async () => {
+  const blogs = await Blog.find({})
+  // const blogtojson = JSON.parse(blogs)
+  const blogtojson = blogs.map((blog) => blog.toJSON())
+  // logger.info(
+  //   `BloginDB function found ${blogtojson} in Mongo type of blogs = ${typeof blogtojson}`
+  // )
+  return blogtojson
+}
+
 module.exports = {
   bloginitiated,
+  BloginDB,
 }
