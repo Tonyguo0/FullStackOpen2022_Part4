@@ -56,7 +56,7 @@ test('POST creates a new blog post successfully', async () => {
   )
 })
 
-test.only('DELETE deletes a blog successfully', async () => {
+test('DELETE deletes a blog successfully', async () => {
   const BlogAtStart = await bloghelp.BloginDB()
   const BlogtoDelete = BlogAtStart[1]
 
@@ -67,6 +67,28 @@ test.only('DELETE deletes a blog successfully', async () => {
 
   const blogtitle = BlogsAfterDelete.map((b) => b.title)
   expect(blogtitle).not.toContain(BlogtoDelete.title)
+})
+
+test.only('UPDATE update a blog successfully', async () => {
+  const BlogStart = await bloghelp.BloginDB()
+  const BlogtoChange = BlogStart[1]
+
+  const ChangedBlog = {
+    title: 'hehe xd changed',
+    author: 'not Tony still',
+    url: 'https://reactjs.org/docs/hooks-state.html',
+    likes: '23',
+  }
+  const blogafterchange = await api
+    .put(`/api/blogs/${BlogtoChange.id}`)
+    .send(ChangedBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const BlogsAfterChange = await bloghelp.BloginDB()
+  // const blogtitle = BlogAfterChange.map(b=>b.title)
+  expect(BlogsAfterChange).toContainEqual(blogafterchange.body)
+  expect(BlogsAfterChange).not.toContainEqual(BlogtoChange)
 })
 
 afterAll(() => {
