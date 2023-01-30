@@ -1,13 +1,16 @@
 const mongoose = require('mongoose')
 // test can use the api superagent object to make HTTP requests to the backend
 const supertest = require('supertest')
-const api = supertest(app)
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
 const app = require('../app')
+const api = supertest(app)
+
 const Note = require('../models/note')
 const helper = require('./test_helper')
+
+const logger = require('../utils/logger')
 
 beforeEach(async () => {
   await Note.deleteMany({})
@@ -49,6 +52,7 @@ describe('viewing a specific note', () => {
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
+    logger.info(`result note is ${JSON.stringify(resultNote)}`)
     // to turn the notes object's data property value type from Date object into a string then we must JSON serialize and parse noteToView
     const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
     expect(resultNote.body).toEqual(processedNoteToView)
@@ -115,7 +119,7 @@ describe('deletion of a note', () => {
   })
 })
 
-describe('when there is initially one user in db', () => {
+describe.only('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
@@ -144,6 +148,32 @@ describe('when there is initially one user in db', () => {
 
     const usernames = usersAtEnd.map((u) => u.username)
     expect(usernames).toContain(newUser.username)
+  })
+
+  test.only('creation fails with proper statuscode and message if username is already in the db', async () => {
+    jest.setTimeout(10000)
+
+    const usersAtStart = await helper.usersInDb()
+    logger.info(`user at the start is ${usersAtStart}`)
+
+    const newUser = {
+      username: 'root',
+      name: 'Superuser',
+      password: 'salainen',
+    }
+    // rn this isn't completing and is stuck because there's an validation error
+    const result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
+    logger.info(`actual result is ${result}`)
+    logger.info(`actual result.message is ${result.message}`)
+    expect(result.body.error).toContain('expected `username` to be unique')
+
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd).toEqual(usersAtStart)
   })
 })
 

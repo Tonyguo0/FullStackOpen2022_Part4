@@ -2,15 +2,16 @@ const config = require('./utils/config')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const notesRouter = require('./controllers/notes')
-const usersRouter = require('./controllers/users')
-const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 // this is used to eliminate the use of try and catch next(err) in the route handlers
 require('express-async-errors')
 
-logger.info('connecting to', config.MONGODB_URI)
+const notesRouter = require('./controllers/notes')
+const usersRouter = require('./controllers/users')
+const middleware = require('./utils/middleware')
+
+logger.info('connecting to MongoDB')
 
 mongoose
   .connect(config.MONGODB_URI)
