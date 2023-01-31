@@ -1,6 +1,7 @@
 // exports the router to be available for all consumers of the module
 const notesRouter = require('express').Router()
 const Note = require('../models/note')
+const User = require('../models/user')
 
 notesRouter.get('/helloworld', (request, response) => {
   response.send('<h1>Hello world!!!</h1>')
@@ -55,6 +56,8 @@ notesRouter.post('/', async (request, response) => {
   // request.body has the supposed new json request object note that needs to be added using post
   const body = request.body
 
+  const user = await User.findById(body.userId)
+
   if (body.content === undefined) {
     return response.status(400).json({ error: 'content missing' })
   }
@@ -63,10 +66,14 @@ notesRouter.post('/', async (request, response) => {
     content: body.content,
     important: body.important || false,
     date: new Date(),
+    user: user._id,
   })
 
   const savedNote = await note.save()
-  response.status(201).json(savedNote)
+  user.notes = user.notes.concat(savedNote._id)
+  await user.save()
+
+  response.json(savedNote)
 })
 
 module.exports = notesRouter
