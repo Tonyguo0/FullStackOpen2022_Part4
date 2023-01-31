@@ -161,7 +161,7 @@ describe.only('when there is initially one user in db', () => {
       name: 'Superuser',
       password: 'salainen',
     }
-    // rn this isn't completing and is stuck because there's an validation error
+    // rn this is completing but is a socket error because the express-async-errors package isn't working
     const result = await api
       .post('/api/users')
       .send(newUser)
@@ -175,6 +175,7 @@ describe.only('when there is initially one user in db', () => {
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toEqual(usersAtStart)
   })
+
 })
 
 afterAll(() => {

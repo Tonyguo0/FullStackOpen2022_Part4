@@ -1,11 +1,13 @@
+// this is used to eliminate the use of try and catch next(err) in the route handlers
+// but is not working rn for some reason???
+require('express-async-errors')
+
 const config = require('./utils/config')
 const express = require('express')
 const app = express()
 const cors = require('cors')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
-// this is used to eliminate the use of try and catch next(err) in the route handlers
-require('express-async-errors')
 
 const notesRouter = require('./controllers/notes')
 const usersRouter = require('./controllers/users')
