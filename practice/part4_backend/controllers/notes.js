@@ -8,7 +8,7 @@ notesRouter.get('/helloworld', (request, response) => {
 })
 
 notesRouter.get('/', async (request, response) => {
-  const note = await Note.find({})
+  const note = await Note.find({}).populate('user', { username: 1, name: 1 })
   response.json(note)
 })
 
