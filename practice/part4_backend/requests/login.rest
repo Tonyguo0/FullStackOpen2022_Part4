@@ -1,0 +1,7 @@
+POST http://172.28.236.197:3003/api/login
+Content-Type: application/json
+
+{
+    "username": "hello",
+    "password": "salainen"
+}
