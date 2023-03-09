@@ -1,5 +1,6 @@
 # Others
 db copy.json
+requests/
 
 # Logs
 logs

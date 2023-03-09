@@ -1,7 +1,19 @@
-POST http://172.28.236.197:3003/api/login
+# POST http://localhost:3003/api/login
+POST http://localhost:3003/api/login
 Content-Type: application/json
 
 {
     "username": "hello",
     "password": "salainen"
+}
+
+################################
+
+POST http://localhost:3003/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxvIiwiaWQiOiI2M2Q3ZTVjODBkYjhkY2I0NTlmYzdiNDYiLCJpYXQiOjE2Nzc0MTIxOTF9.FRH-a7D_X3wQlQR6J8q5bplIzMkK3nhZTQH2oN5Bw_I
+
+{
+    "content": "Single Page Apps use token autication",
+    "important": true
 }
