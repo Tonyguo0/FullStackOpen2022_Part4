@@ -22,6 +22,6 @@ app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
 app.use('/api/blogs', BloglistsRouter)
-app.use('api/users', UsersRouter)
+app.use('/api/users', UsersRouter)
 
 module.exports = app

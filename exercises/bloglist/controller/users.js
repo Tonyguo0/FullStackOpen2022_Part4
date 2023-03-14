@@ -1,10 +1,14 @@
 const User = require('../models/user');
-const UsersRouter = require(express).Router()
+const UsersRouter = require('express').Router()
 const Logger = require('../utils/logger');
 const bcrypt = require('bcrypt');
-const {
-    response
-} = require('../app');
+
+
+UsersRouter.get('/', async (req, res, next) => {
+    returneduser = await User.find({})
+
+    res.json(returneduser).status(200).end()
+})
 
 UsersRouter.post('/', async (req, res) => {
 
@@ -24,7 +28,9 @@ UsersRouter.post('/', async (req, res) => {
     })
 
     const savedUser = await user.save()
-    response.status(201).json(savedUser)
+    res.status(201).json(savedUser)
 })
+
+
 
 module.exports = UsersRouter
