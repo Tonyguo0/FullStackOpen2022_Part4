@@ -4,8 +4,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "hehe xd",
-    "author": "Na",
-    "url": "https://reactjs.org/docs/hooks-state.html",
-    "likes": "232"
+"title": "hehe xd oh hell Na xd",
+"author": "Na",
+"url": "https://reactjs.org/docs/hooks-state.html",
+"likes": 232
 }

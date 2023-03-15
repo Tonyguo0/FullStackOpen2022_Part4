@@ -5,7 +5,12 @@ const bcrypt = require('bcrypt');
 
 
 UsersRouter.get('/', async (req, res, next) => {
-    returneduser = await User.find({})
+    returneduser = await User.find({}).populate('blogs', {
+        title: 1,
+        author: 1,
+        url: 1,
+        likes: 1
+    })
 
     res.json(returneduser).status(200).end()
 })
