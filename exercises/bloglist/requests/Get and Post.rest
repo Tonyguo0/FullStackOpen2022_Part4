@@ -2,10 +2,11 @@ get http://localhost:3003/api/blogs
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvbnkiLCJpZCI6IjY0MTMyMDFkYmQwYzk2ZmE4Zjk1NjIyNSIsImlhdCI6MTY3ODk3NzY4NX0.sAETUx0dQIVYz81NTjDzpFk3XSCw0hrAD5-KhzaNX-U
 
 {
-"title": "hehe xd oh hell Na xd",
-"author": "Na",
-"url": "https://reactjs.org/docs/hooks-state.html",
-"likes": 232
+    "title": "hehe xd oh hell Na xd3",
+    "author": "Na",
+    "url": "https://reactjs.org/docs/hooks-state.html",
+    "likes": 23213
 }

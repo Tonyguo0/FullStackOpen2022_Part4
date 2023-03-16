@@ -17,8 +17,8 @@
 - [x] exercise 4.15
 - [ ] exercise 4.16
 - [x] exercise 4.17
-- [ ] exercise 4.18
-- [ ] exercise 4.19
+- [x] exercise 4.18
+- [x] exercise 4.19
 - [ ] exercise 4.20
 - [ ] exercise 4.21
 - [ ] exercise 4.22

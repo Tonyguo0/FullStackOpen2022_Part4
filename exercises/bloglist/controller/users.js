@@ -3,7 +3,6 @@ const UsersRouter = require('express').Router()
 const Logger = require('../utils/logger');
 const bcrypt = require('bcrypt');
 
-
 UsersRouter.get('/', async (req, res, next) => {
     returneduser = await User.find({}).populate('blogs', {
         title: 1,

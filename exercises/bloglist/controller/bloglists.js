@@ -2,6 +2,7 @@ const bloglistsRouter = require('express').Router()
 const Blog = require('../models/bloglist')
 const User = require('../models/user')
 const logger = require('../utils/logger')
+const jwt = require('jsonwebtoken')
 
 
 bloglistsRouter.get('/', async (request, response) => {
@@ -13,13 +14,26 @@ bloglistsRouter.get('/', async (request, response) => {
   response.json(bloglist)
 })
 
+// isolate the token from authorization header
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+}
+
 bloglistsRouter.post('/', async (request, response) => {
   const body = request.body
 
   // find the exact user based on userid in the body of the request of the post
-  const user = await User.findOne().sort({
-    _id: -1
-  })
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({
+      error: 'token invalid'
+    })
+  }
+  
+  const user = await User.findById(decodedToken.id)
 
   // create a new blog object that references this user's ID
   const blog = new Blog({
